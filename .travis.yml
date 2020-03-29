@@ -1,0 +1,29 @@
+language: node_js
+node_js:
+  - '10.13'
+cache: false
+services:
+  - postgresql
+env:
+  global:
+    - CC_TEST_REPORTER_ID=b32cfabba3ff95b514d3e4bfd06cc96db7a7e0d539ee797d1d3300c11a3cc6f5
+
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+  - psql -c 'create database test;' -U postgres
+
+script:
+  - npm install
+  - npm run test
+
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
+after_success:
+  - npm run coverage
+  - npm run coveralls
+
+notifications:
+  email: true

@@ -1,0 +1,54 @@
+{
+  "name": "Book-A-Mechanic-Node-API",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production npm run build && node ./build/app.js",
+    "start:dev": "cross-env NODE_ENV=development nodemon --exec babel-node src/app.js",
+    "build": "npm run clean && npm run build-babel",
+    "clean": "rm -rf build && mkdir build",
+    "build-babel": "babel -d ./build ./src -s",
+    "test": "cross-env NODE_ENV=test nyc mocha --require @babel/register --require @babel/polyfill src/tests --exit",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PROSPER-CLAN/Book-A-Mechanic-Node-API.git"
+  },
+  "keywords": [],
+  "author": "Devc Internship backend Developers",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PROSPER-CLAN/Book-A-Mechanic-Node-API/issues"
+  },
+  "homepage": "https://github.com/PROSPER-CLAN/Book-A-Mechanic-Node-API#readme",
+  "dependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/polyfill": "^7.8.7",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/register": "^7.9.0",
+    "@babel/runtime": "^7.9.2",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "chai-http": "^4.3.0",
+    "cross-env": "^7.0.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^7.18.2",
+    "pg-connection-string": "^2.2.0"
+  },
+  "devDependencies": {
+    "coveralls": "^3.0.11",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "mocha": "^7.1.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.2",
+    "nyc": "^15.0.0"
+  }
+}
